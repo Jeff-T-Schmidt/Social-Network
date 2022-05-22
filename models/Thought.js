@@ -16,8 +16,8 @@ const thoughtSchema = new Schema(
             Date,
             default: Date.now,
             get: (date) => {
-                if (date) return date.toISOString().split("T") [0];
-              },
+                if (date) return date.toISOString().split("T")[0];
+            },
         },
         username: //(The user that created this thought)
         {
@@ -31,6 +31,7 @@ const thoughtSchema = new Schema(
     {
         toJSON: {
             virtuals: true,
+            getters: true
         },
         id: false,
     }
