@@ -1,7 +1,7 @@
 const User = require('./User');
 const Response = require('./Response');
-const Video = require('./Video');
+const Thought = require('./Thought');
 
-module.exports = { User, Video, Response };
+module.exports = { User, Thought, Response };
 
 // Info is incorrect - NTB updated
