@@ -6,14 +6,14 @@ const thoughtSchema = new Schema(
     {
         thoughtText:
         {
-            String,
+            type: String,
             required: true,
             minLength: 1,
             maxLength: 280,
         },
         createdAt:
         {
-            Date,
+            type: Date,
             default: Date.now,
             get: (date) => {
                 if (date) return date.toISOString().split("T")[0];
@@ -21,7 +21,7 @@ const thoughtSchema = new Schema(
         },
         username: //(The user that created this thought)
         {
-            String,
+            type: String,
             required: true,
         },
         reactions: [Reaction],

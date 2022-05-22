@@ -1,18 +1,17 @@
 const { Schema, model } = require('mongoose');
 
 // Schema to create User model
-const userSchema = new Schema(
-  {
+const userSchema = new Schema({
     username:
-    {
-      String,
+    { 
+      type: String,
       unique: true,
       required: true,
       trim: true
     },
     email:
     {
-      String,
+      type: String,
       unique: true,
       required: true,
       match: /.+\@.+\..+/
@@ -20,14 +19,14 @@ const userSchema = new Schema(
     //Array of _id values referencing the Thought model
     thoughts: [
       {
-        type: _id,
+        type: Schema.Types.ObjectId,
         ref: 'Thought'
       }
     ],
     //Array of _id values referencing the User model (self-reference)
     friends: [
       {
-        type: _id,
+        type: Schema.Types.ObjectId,
         ref: 'User'
       }
     ]
