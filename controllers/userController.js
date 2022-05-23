@@ -41,7 +41,7 @@ module.exports = {
             .json({ message: 'Some error message, userController' })
           : res.json({ message: 'User successfully deleted!' })
       )
-      .catch((err) => res.status(500).json(err));
+      .catch((err) => res.status(200).json(err));
   },
   updateUser(req, res) {
     User.findOneAndUpdate(
