@@ -65,29 +65,36 @@ module.exports = {
       { $addToSet: { friends: req.params.friendId } },
       { runValidators: true, new: true }
     )
-    .populate('friends')
-    .populate('thoughts')
+      .populate('friends')
+      .populate('thoughts')
       .then((user) =>
         !user
           ? res.status(404).json({ message: 'No user with this id!' })
           : res.json(user)
       )
-      .catch((err) =>{
+      .catch((err) => {
         console.log(err)
-       res.status(500).json(err);
+        res.status(500).json(err);
       })
   },
   removeFriend(req, res) {
-    User.findOneAndUpdate(
-      { _id: req.params.userId },
-      { $pull: { reactions: { responseId: req.params.responseId } } },
-      { runValidators: true, new: true }
-    )
+    User.findOneAndRemove({ _id: req.params.userId }, {$pull: { friends: req.params.friendId} })
       .then((user) =>
         !user
           ? res.status(404).json({ message: 'No user with this id!' })
-          : res.json(user)
+          : user.findOneAndUpdate(
+            { users: req.params.userId },
+            { $pull: { friends: req.params.friendId } },
+            { new: true }
+          )
       )
-      .catch((err) => res.status(500).json(err));
+      .then((user) =>
+        !user
+          ? res
+            .status(404)
+            .json({ message: 'Some error message, userController' })
+          : res.json({ message: 'User successfully deleted!' })
+      )
+      .catch((err) => res.status(200).json(err));
   },
 };

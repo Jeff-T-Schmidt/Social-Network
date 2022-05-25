@@ -17,7 +17,7 @@ router
   .route('/:userId')
   .get(getSingleUser)
   .put(updateUser)
-  .delete(deleteUser)
+  .delete(deleteUser);
 
 
 //GET a single user by its _id and populated thought and friend data
